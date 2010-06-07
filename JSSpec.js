@@ -657,7 +657,7 @@ JSSpec.IncludeMatcher.prototype.explain = function() {
 };
 
 JSSpec.IncludeMatcher.prototype.makeExplain = function() {
-	if(typeof this.actual.length == 'undefined') {
+	if(Object.prototype.toString.call(this.actual) != '[object Array]') {
 		return this.makeExplainForNotArray();
 	} else {
 		return this.makeExplainForArray();
@@ -1458,7 +1458,7 @@ JSSpec.util = {
 
 		if(JSSpec.util.isDomNode(o)) return JSSpec.util.inspectDomNode(o);
 
-		if(o._type == 'Array' || typeof o.length != 'undefined') {
+		if(o._type == 'Array' || typeof Object.prototype.toString.call(o) == '[object Array]') {
 			sb = [];
 			for(var i = 0; i < o.length; i++) {
 				inspected = JSSpec.util.inspect(o[i]);
